@@ -20,6 +20,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('/produtos', [FornecedoresController::class, 'getAllProducts']);
+
 Route::get('/produtos/{fid}', [FornecedoresController::class, 'getProducts']);
 
 Route::get('/produto/{fid}/{pid}', [FornecedoresController::class, 'getProduct']);

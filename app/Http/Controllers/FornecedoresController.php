@@ -36,4 +36,32 @@ class FornecedoresController extends Controller
 
         return response()->json($jsonData);
     }
+
+    private function sortProds($a, $b) {
+        return $a['id'] - $b['id'];
+    }
+
+    public function getAllProducts()
+    {
+        $fornecedores = Fornecedor::all();
+
+        $produtos = [];
+
+        $fornecedores->each(function($fornecedor) use (&$produtos)
+        {
+              $fid = $fornecedor->id;
+              $response = Http::get($fornecedor->all_prod_url);
+              $jsonData = array_map(function($prod) use ($fid) {
+                $prod['fornecedor'] = $fid;
+                return $prod;
+              }, $response->json());
+
+              $produtos = array_merge($produtos, $jsonData);
+        });
+
+        usort($produtos, [$this, "sortProds"]);
+
+        return response()->json($produtos);
+    }
+
 }
