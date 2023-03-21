@@ -26,4 +26,4 @@ Route::get('/produtos/{fid}', [FornecedoresController::class, 'getProducts']);
 
 Route::get('/produto/{fid}/{pid}', [FornecedoresController::class, 'getProduct']);
 
-Route::get('/cart/', [CartsController::class, 'getProduct']);
+Route::get('/cart/', [CartsController::class, 'getCart']);

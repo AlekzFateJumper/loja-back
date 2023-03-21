@@ -31,7 +31,7 @@ class FornecedoresController extends Controller
           ], 404);
         }
         $url = str_replace('<id>', $pid, $fornecedor->single_prod_url);
-        $response = Http::get();
+        $response = Http::get($url);
         $jsonData = $response->json();
 
         return response()->json($jsonData);
